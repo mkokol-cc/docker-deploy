@@ -1,0 +1,24 @@
+<div class="w-100 d-flex justify-content-center position-relative" *ngIf="codigo">
+    <div class="p-3 barcode-container">
+      <div id="barcodeContainer"><!--#barcodeContainer-->
+        <img alt='Barcode Generator TEC-IT' #barcodeImage
+        /><!--src='https://barcode.tec-it.com/barcode.ashx?data={{codigo}}&code=Code128&translate-esc=on' #barcodeImage -->
+      </div>
+
+      <div class="px-3">
+        <label for="print-barcode">Cantidad a Imprimir:</label>
+        <div class="input-group">
+          <input type="number" class="form-control bg-light border-0 small"
+            name="print-barcode" id="print-barcode" [(ngModel)]="cantidad" 
+            aria-describedby="basic-addon2" min="1">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="generatePDF()">
+              <i class="bi bi-printer"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>

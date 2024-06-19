@@ -1,0 +1,31 @@
+.img-container{
+    height: 150px;
+    width: 150px;
+}
+.img-container img{
+    object-fit: cover;
+}
+.img-container .options-img{
+    background-color: rgba(88, 88, 88, 0.5);
+    z-index: 10;
+    display: none;
+}
+
+.img-container:hover > .options-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.img-button{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border:none;
+    background-color: #aaa;
+    font-size: 130%;
+}
+.img-button:hover{
+    background-color: #fff;
+}

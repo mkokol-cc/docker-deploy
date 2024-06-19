@@ -1,0 +1,80 @@
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Grupos</h6>
+</div>
+<div class="card-body">
+
+    <div class="input-group mb-4" *ngIf="listGrupoArticulo" [ngClass]="{'d-none':listGrupoArticulo.length==0}">
+        <input type="text" class="form-control bg-light border-0 small"
+            placeholder="Buscar..." aria-label="Buscar"
+            aria-describedby="basic-addon2" (keyup)="search($event)">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="table-responsive" ><!--*ngIf="listGrupoArticulo" [ngClass]="{'d-none':listGrupoArticulo.length==0}"-->
+
+        <table mat-table [dataSource]="dataSource" class="table table-bordered">
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+              <td mat-footer-cell *matFooterCellDef> Nombre </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="porcentajeRecargoSinIVA">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> % Sin IVA </th>
+              <td mat-cell *matCellDef="let element"> {{element.porcentajeRecargoSinIVA}} </td>
+              <td mat-footer-cell *matFooterCellDef> porcentajeRecargoSinIVA </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="porcentajeRecargoConIVA">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> % Con IVA </th>
+              <td mat-cell *matCellDef="let element"> {{element.porcentajeRecargoConIVA}} </td>
+              <td mat-footer-cell *matFooterCellDef> porcentajeRecargoConIVA </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="porcentajeRecargoTarjeta">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> % Tarjeta </th>
+              <td mat-cell *matCellDef="let element"> {{element.porcentajeRecargoTarjeta}} </td>
+              <td mat-footer-cell *matFooterCellDef> porcentajeRecargoTarjeta </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="porcentajeRecargoTarjeta3Cuotas">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> % Tarjeta 3 Cuotas </th>
+              <td mat-cell *matCellDef="let element"> {{element.porcentajeRecargoTarjeta3Cuotas}} </td>
+              <td mat-footer-cell *matFooterCellDef> porcentajeRecargoTarjeta3Cuotas </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="porcentajeRecargoTarjeta6Cuotas">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> % Tarjeta 6 Cuotas </th>
+              <td mat-cell *matCellDef="let element"> {{element.porcentajeRecargoTarjeta6Cuotas}} </td>
+              <td mat-footer-cell *matFooterCellDef> porcentajeRecargoTarjeta6Cuotas </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="object-row" (click)="edit(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+    <div class="no-data-message-container" *ngIf="listGrupoArticulo" [ngClass]="{'d-none':listGrupoArticulo.length>0}">
+        <div class="w-100 d-flex justify-content-center">
+            <div style="width:70%">
+                <app-no-data-message></app-no-data-message>
+            </div>
+        </div>
+    </div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
+
+<div class="d-none"> <!--YOU NEED TO PUT THE COMPONENT INSIDE A HIDDEN DIV-->
+    <div #grupoArticuloFormComponent>
+        <app-grupo-articulo-form-new [grupoArticuloEdit]="grupoArticuloSelected"></app-grupo-articulo-form-new>
+    </div>
+</div>

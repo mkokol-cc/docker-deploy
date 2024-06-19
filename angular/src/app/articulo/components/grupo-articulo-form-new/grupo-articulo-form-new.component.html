@@ -1,0 +1,109 @@
+<div class="card-header py-3">
+    <h6 *ngIf="!grupoArticuloEdit" class="m-0 font-weight-bold text-primary">Nuevo Grupo</h6>
+    <h6 *ngIf="grupoArticuloEdit" class="m-0 font-weight-bold text-primary">Editar Grupo "{{grupoArticuloEdit.nombre}}"</h6>
+</div>
+<div class="card-body">
+    <form [formGroup]="formNewGrupoArticulo" (ngSubmit)="onSubmit()">
+        <div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Nombre"
+                    aria-label="Nombre" aria-describedby="basic-addon2" formControlName="nombre"
+                    [class.is-invalid]="formNewGrupoArticulo.get('nombre')?.touched && formNewGrupoArticulo.get('nombre')?.invalid">
+                    <div *ngIf="formNewGrupoArticulo.get('nombre')?.touched && formNewGrupoArticulo.get('nombre')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Nombre entre 2 y 30 caracteres
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Efvo"
+                    aria-label="% Agregado Efvo" aria-describedby="basic-addon2" formControlName="porcentajeRecargoSinIVA"
+                    [class.is-invalid]="formNewGrupoArticulo.get('porcentajeRecargoSinIVA')?.touched && formNewGrupoArticulo.get('porcentajeRecargoSinIVA')?.invalid">
+                    <div *ngIf="formNewGrupoArticulo.get('porcentajeRecargoSinIVA')?.touched && formNewGrupoArticulo.get('porcentajeRecargoSinIVA')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo sin IVA no válido
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Efvo (Con IVA)"
+                    aria-label="% Agregado Efvo (Con IVA)" aria-describedby="basic-addon2" formControlName="porcentajeRecargoConIVA"
+                    [class.is-invalid]="formNewGrupoArticulo.get('porcentajeRecargoConIVA')?.touched && formNewGrupoArticulo.get('porcentajeRecargoConIVA')?.invalid">
+                    <div *ngIf="formNewGrupoArticulo.get('porcentajeRecargoConIVA')?.touched && formNewGrupoArticulo.get('porcentajeRecargoConIVA')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con IVA no válido
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Tarjeta"
+                    aria-label="% Agregado Tarjeta" aria-describedby="basic-addon2" formControlName="porcentajeRecargoTarjeta"
+                    [class.is-invalid]="formNewGrupoArticulo.get('porcentajeRecargoTarjeta')?.touched && formNewGrupoArticulo.get('porcentajeRecargoTarjeta')?.invalid">
+                    <div *ngIf="formNewGrupoArticulo.get('porcentajeRecargoTarjeta')?.touched && formNewGrupoArticulo.get('porcentajeRecargoTarjeta')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con Tarjeta no válido
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Tarjeta (3 Cuotas)"
+                    aria-label="% Agregado Tarjeta (3 Cuotas)" aria-describedby="basic-addon2" formControlName="porcentajeRecargoTarjeta3Cuotas"
+                    [class.is-invalid]="formNewGrupoArticulo.get('porcentajeRecargoTarjeta3Cuotas')?.touched && formNewGrupoArticulo.get('porcentajeRecargoTarjeta3Cuotas')?.invalid">
+                    <div *ngIf="formNewGrupoArticulo.get('porcentajeRecargoTarjeta3Cuotas')?.touched && formNewGrupoArticulo.get('porcentajeRecargoTarjeta3Cuotas')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con Tarjeta (3 Cuotas) no válido
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Tarjeta (6 Cuotas)"
+                    aria-label="% Agregado Tarjeta (6 Cuotas)" aria-describedby="basic-addon2" formControlName="porcentajeRecargoTarjeta6Cuotas"
+                    [class.is-invalid]="formNewGrupoArticulo.get('porcentajeRecargoTarjeta6Cuotas')?.touched && formNewGrupoArticulo.get('porcentajeRecargoTarjeta6Cuotas')?.invalid">
+                    <div *ngIf="formNewGrupoArticulo.get('porcentajeRecargoTarjeta6Cuotas')?.touched && formNewGrupoArticulo.get('porcentajeRecargoTarjeta6Cuotas')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con Tarjeta (6 Cuotas) no válido
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button type="button" class="btn btn-primary btn-icon-split" (click)="clear()">
+                    <span class="icon text-white-50">
+                        <i class="bi bi-backspace"></i>
+                    </span>
+                    <span class="text">Limpiar</span>
+                </button>
+            </div>
+            <div *ngIf="grupoArticuloEdit">
+                <button type="button" class="btn btn-primary btn-icon-split" (click)="delete()">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Eliminar</span>
+                </button>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success btn-icon-split"
+                [disabled]="formNewGrupoArticulo.invalid">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Guardar</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+<!--
+<div>
+    <button (click)="testEliminar()">Eliminar</button>
+    <button (click)="testListar()">Listar</button>
+    <button (click)="testEditar()">Editar</button>
+    <div *ngIf="grupoArticulo">
+        {{grupoArticulo|json}}
+    </div>
+</div>
+-->

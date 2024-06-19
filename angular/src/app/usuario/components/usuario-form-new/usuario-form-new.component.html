@@ -1,0 +1,86 @@
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Usuarios</h6>
+</div>
+<div class="card-body">
+    
+    <form [formGroup]="formNewUsuario" (ngSubmit)="onSubmit()">
+        <div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Nombre..."
+                    aria-label="Nombre" aria-describedby="basic-addon2" formControlName="nombre"
+                    [class.is-invalid]="formNewUsuario.get('nombre')?.touched && formNewUsuario.get('nombre')?.invalid">
+                    <div *ngIf="formNewUsuario.get('nombre')?.touched && formNewUsuario.get('nombre')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Nombre entre 2 y 30 caracteres
+                    </div>
+                </div>
+                @if(usuarioEdit){
+                    <div class="col-6">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Nueva Clave..."
+                        aria-label="Clave" aria-describedby="basic-addon2" formControlName="clave"
+                        [class.is-invalid]="formNewUsuario.get('clave')?.touched && formNewUsuario.get('clave')?.invalid">
+                        <div *ngIf="formNewUsuario.get('clave')?.touched && formNewUsuario.get('clave')?.invalid" 
+                        class="invalid-feedback m-0 position-absolute">
+                            Clave entre 6 y 30 caracteres
+                        </div>
+                    </div>
+                }@else{
+                    <div class="col-6">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Clave..."
+                        aria-label="Clave" aria-describedby="basic-addon2" formControlName="clave"
+                        [class.is-invalid]="formNewUsuario.get('clave')?.touched && formNewUsuario.get('clave')?.invalid">
+                        <div *ngIf="formNewUsuario.get('clave')?.touched && formNewUsuario.get('clave')?.invalid" 
+                        class="invalid-feedback m-0 position-absolute">
+                            Clave entre 6 y 30 caracteres
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <select class="form-control bg-light border-0 small" formControlName="perfil"
+                    [class.is-invalid]="formNewUsuario.get('perfil')?.touched && formNewUsuario.get('perfil')?.invalid">
+                        <option disabled selected>Elige un Perfil</option>
+                        <option *ngFor="let p of listPerfil" [ngValue]="p.id">{{p.nombre}}</option>
+                    </select>
+                    <div *ngIf="formNewUsuario.get('perfil')?.touched && formNewUsuario.get('perfil')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Debe seleccionar un perfil para el usuario
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="bi bi-backspace"></i>
+                    </span>
+                    <span class="text">Limpiar</span>
+                </button>
+            </div>
+            <div>
+                @if(usuarioEdit){
+                    <button type="submit" class="btn btn-success btn-icon-split"
+                    [disabled]="(formNewUsuario.get('clave')?.value.length==0 && (formNewUsuario.get('nombre')?.invalid || formNewUsuario.get('perfil')?.invalid)) || (formNewUsuario.invalid && formNewUsuario.get('clave')?.value.length>0)">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Editar</span>
+                    </button>
+                }@else{
+                    <button type="submit" class="btn btn-success btn-icon-split"
+                    [disabled]="formNewUsuario.invalid">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Guardar</span>
+                    </button>
+                }
+            </div>
+        </div>
+    </form>
+
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>

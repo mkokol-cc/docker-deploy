@@ -1,0 +1,19 @@
+input[type="date"]{
+    color: #858796;
+    font-weight: bold;
+    border: none;
+}
+.datepicker-container{
+    border-bottom: 1px solid;
+}
+
+
+.load{
+    top:0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index:5;
+    transition: all ease-in 1s;
+    background:#fff;
+}

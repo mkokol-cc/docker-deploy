@@ -1,0 +1,153 @@
+<div class="card-header py-3">
+    <h6 *ngIf="!comboEdit" class="m-0 font-weight-bold text-primary">Nuevo Combo</h6>
+    <h6 *ngIf="comboEdit" class="m-0 font-weight-bold text-primary">Editar Combo "{{comboEdit.nombre}}"</h6>
+</div>
+<div class="card-body">
+    <form [formGroup]="formNewCombo" (ngSubmit)="onSubmit()">
+        <div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Nombre"
+                    aria-label="Nombre" aria-describedby="basic-addon2" formControlName="nombre"
+                    [class.is-invalid]="formNewCombo.get('nombre')?.touched && formNewCombo.get('nombre')?.invalid">
+                    <div *ngIf="formNewCombo.get('nombre')?.touched && formNewCombo.get('nombre')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Nombre entre 2 y 30 caracteres
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Efvo"
+                    aria-label="% Agregado Efvo" aria-describedby="basic-addon2" formControlName="porcentajeRecargoSinIVA"
+                    [class.is-invalid]="formNewCombo.get('porcentajeRecargoSinIVA')?.touched && formNewCombo.get('porcentajeRecargoSinIVA')?.invalid">
+                    <div *ngIf="formNewCombo.get('porcentajeRecargoSinIVA')?.touched && formNewCombo.get('porcentajeRecargoSinIVA')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo sin IVA no válido
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Efvo (Con IVA)"
+                    aria-label="% Agregado Efvo (Con IVA)" aria-describedby="basic-addon2" formControlName="porcentajeRecargoConIVA"
+                    [class.is-invalid]="formNewCombo.get('porcentajeRecargoConIVA')?.touched && formNewCombo.get('porcentajeRecargoConIVA')?.invalid">
+                    <div *ngIf="formNewCombo.get('porcentajeRecargoConIVA')?.touched && formNewCombo.get('porcentajeRecargoConIVA')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con IVA no válido
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Tarjeta"
+                    aria-label="% Agregado Tarjeta" aria-describedby="basic-addon2" formControlName="porcentajeRecargoTarjeta"
+                    [class.is-invalid]="formNewCombo.get('porcentajeRecargoTarjeta')?.touched && formNewCombo.get('porcentajeRecargoTarjeta')?.invalid">
+                    <div *ngIf="formNewCombo.get('porcentajeRecargoTarjeta')?.touched && formNewCombo.get('porcentajeRecargoTarjeta')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con Tarjeta no válido
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Tarjeta (3 Cuotas)"
+                    aria-label="% Agregado Tarjeta (3 Cuotas)" aria-describedby="basic-addon2" formControlName="porcentajeRecargoTarjeta3Cuotas"
+                    [class.is-invalid]="formNewCombo.get('porcentajeRecargoTarjeta3Cuotas')?.touched && formNewCombo.get('porcentajeRecargoTarjeta3Cuotas')?.invalid">
+                    <div *ngIf="formNewCombo.get('porcentajeRecargoTarjeta3Cuotas')?.touched && formNewCombo.get('porcentajeRecargoTarjeta3Cuotas')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con Tarjeta (3 Cuotas) no válido
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="% Agregado Tarjeta (6 Cuotas)"
+                    aria-label="% Agregado Tarjeta (6 Cuotas)" aria-describedby="basic-addon2" formControlName="porcentajeRecargoTarjeta6Cuotas"
+                    [class.is-invalid]="formNewCombo.get('porcentajeRecargoTarjeta6Cuotas')?.touched && formNewCombo.get('porcentajeRecargoTarjeta6Cuotas')?.invalid">
+                    <div *ngIf="formNewCombo.get('porcentajeRecargoTarjeta6Cuotas')?.touched && formNewCombo.get('porcentajeRecargoTarjeta6Cuotas')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Recargo con Tarjeta (6 Cuotas) no válido
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Código"
+                    aria-label="Código" aria-describedby="basic-addon2" formControlName="codigo"
+                    [class.is-invalid]="formNewCombo.get('codigo')?.touched && formNewCombo.get('codigo')?.invalid">
+                    <div *ngIf="formNewCombo.get('codigo')?.touched && formNewCombo.get('codigo')?.invalid" 
+                    class="invalid-feedback m-0 position-absolute">
+                        Código entre 2 y 30 caracteres
+                    </div>
+                </div>
+            </div>
+            <h3>Items Del Combo:</h3>
+            <div>
+                <div class="row align-items-center mb-2" *ngFor="let ac of listArticuloCombo">
+                    <div class="col-6">
+                        {{ac.articulo?.codigo}} - {{ac.articulo?.nombre}}
+                    </div>
+                    <div class="col-4">
+                        {{ac.cantidad}} Unidades
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary btn-circle btn-sm" (click)="deleteArticuloCombo(ac)">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <form [formGroup]="formNewSingleArticuloCombo" (ngSubmit)="onSubmit()" class="row mb-4 align-items-center">
+                    <div class="col-6">
+                        <select class="form-control bg-light border-0 small"  formControlName="articulo">
+                            <option *ngFor="let a of listArticulo" [ngValue]="a.id">{{a.codigo}}-{{a.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="Cantidad"
+                        aria-label="Cantidad" aria-describedby="basic-addon2" formControlName="cantidad"
+                        [class.is-invalid]="formNewSingleArticuloCombo.get('cantidad')?.touched && formNewSingleArticuloCombo.get('cantidad')?.invalid">
+                        <div *ngIf="formNewSingleArticuloCombo.get('cantidad')?.touched && formNewSingleArticuloCombo.get('cantidad')?.invalid" 
+                        class="invalid-feedback m-0 position-absolute">
+                            Cantidad no válida
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-primary btn-circle"
+                        (click)="addArticuloCombo()" [disabled]="formNewSingleArticuloCombo.invalid">
+                            <span class="icon text-white-50">
+                                <i class="bi bi-plus-lg"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button class="btn btn-primary btn-icon-split" id="btnClean">
+                    <span class="icon text-white-50">
+                        <i class="bi bi-backspace"></i>
+                    </span>
+                    <span class="text">Limpiar</span>
+                </button>
+            </div>
+            <div *ngIf="comboEdit">
+                <button type="button" class="btn btn-primary btn-icon-split" (click)="delete()">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Eliminar</span>
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-success btn-icon-split" id="btnAddArticulo"
+                [disabled]="formNewCombo.invalid || listArticuloCombo.length==0">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Guardar</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>

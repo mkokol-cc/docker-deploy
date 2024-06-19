@@ -1,0 +1,51 @@
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Perfiles</h6>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+
+        <table mat-table [dataSource]="dataSource" class="table table-bordered">
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+              <td mat-footer-cell *matFooterCellDef> Nombre </td>
+            </ng-container>
+            <!--
+            <ng-container matColumnDef="cantidad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+                <td mat-cell *matCellDef="let element"> {{element.}} </td>
+                <td mat-footer-cell *matFooterCellDef> Descripción </td>
+            </ng-container>
+            -->
+            <!--
+            <ng-container matColumnDef="usuarios">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuarios </th>
+              <td mat-cell *matCellDef="let element"> <button>ver usuarios</button> </td>
+              <td mat-footer-cell *matFooterCellDef> Usuarios </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="roles">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Permisos </th>
+              <td mat-cell *matCellDef="let element"> <button>ver permisos</button> </td>
+              <td mat-footer-cell *matFooterCellDef> Permisos </td>
+            </ng-container>
+            -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="object-row" (click)="edit(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons>
+        </mat-paginator>
+
+    </div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
+<div class="d-none">
+  <div #perfilViewer>
+      <app-perfil-form-new [perfilEdit]="perfilSelected"></app-perfil-form-new>
+  </div>
+</div>

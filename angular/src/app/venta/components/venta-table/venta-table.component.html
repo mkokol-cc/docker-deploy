@@ -1,0 +1,84 @@
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Ventas</h6>
+</div>
+<div class="card-body position-relative">
+
+    <div class="row w-100 m-0">
+        <div class="col-4">
+            <select class="form-control bg-light border-0 small" (change)="onSelectionChange($event)">
+                <option selected class="d-none">Ordenar Por</option>
+                <option [value]="1">Fecha Más Reciente</option>
+                <option [value]="2">Fecha Menos Reciente</option>
+                <option [value]="3">Mayor Total Venta</option>
+                <option [value]="4">Menor Total Venta</option>
+            </select>
+        </div>
+        <div class="col-8">
+            <app-search-bar (searchValue)="receiveSearchValue($event)" (clearSearch)="clearfilter()"></app-search-bar>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center w-100 justify-content-center mb-4">
+        <div class="mr-3">Fecha Desde: </div>
+        <div class="datepicker-container"><input type="date" name="dateInit" id="dateInit" [(ngModel)]="fechaInicio" (change)="onInitDateChange($event)"></div>
+        <div class="mx-3">-</div>
+        <div class="mr-3">Fecha Hasta: </div>
+        <div class="datepicker-container"><input type="date" name="dateEnd" id="dateEnd" [(ngModel)]="fechaFin" (change)="onEndDateChange($event)"></div>
+    </div>
+
+    <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource" class="table table-bordered" *ngIf="listVenta && listVenta.length>0">
+
+            <ng-container matColumnDef="fechaHora">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                <td mat-cell *matCellDef="let element"> {{formattedDate(element.fechaHora) | date:"dd/MM/yyyy '-' HH:mm"}} </td>
+                <td mat-footer-cell *matFooterCellDef> Fecha </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                <td mat-cell *matCellDef="let element"> ${{calcularTotal(element).toFixed(2)}}</td><!--{{element}}-->
+                <td mat-footer-cell *matFooterCellDef> Total </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="tipoPago">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de Pago </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipoPago}} </td>
+                <td mat-footer-cell *matFooterCellDef> Tipo de Pago </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="clienteCuitDni">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente CUIT/DNI </th>
+                <td mat-cell *matCellDef="let element"> {{element.cliente.cuitDni}} </td>
+                <td mat-footer-cell *matFooterCellDef> Cliente CUIT/DNI </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="clienteNombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente Nombre </th>
+                <td mat-cell *matCellDef="let element"> {{element.cliente.nombre}} </td>
+                <td mat-footer-cell *matFooterCellDef> Cliente Nombre </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="object-row" (click)="edit(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        </table>
+        <div class="no-data-message-container" *ngIf="listVenta && listVenta.length==0"><!--[ngClass]="{'d-none':listArticulo.length>0}"-->
+            <div class="w-100 d-flex justify-content-center">
+                <div style="width:70%">
+                    <app-no-data-message></app-no-data-message>
+                </div>
+            </div>
+        </div>
+        
+        <app-loader [isLoading]="isLoading"></app-loader>
+    </div>
+</div>
+
+<!--[articuloEdit]="articuloSelected"-->
+<div class="d-none">
+    <div #ventaViewer>
+        <app-detalle-venta-table *ngIf="ventaSelected.detalleVenta" [detalleVentaEdit]="ventaSelected.detalleVenta"></app-detalle-venta-table>
+        <app-cliente-form *ngIf="ventaSelected.cliente" [clienteEdit]="ventaSelected.cliente"></app-cliente-form>
+    </div>
+</div>

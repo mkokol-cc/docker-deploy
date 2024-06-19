@@ -1,0 +1,15 @@
+<div class="position-relative">
+    <div class="input-group">
+            
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Artículo..."
+            aria-label="Search" aria-describedby="basic-addon2" [(ngModel)]="codigo"
+            (keydown.enter)="find()" (keydown.tab)="find()"><!--Seimpre focus - captaar TAB y ENTER event-->
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="find()">
+                <i class="bi bi-plus-lg"></i>
+            </button>
+        </div>
+        
+    </div>
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>

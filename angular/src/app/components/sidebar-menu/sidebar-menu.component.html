@@ -1,0 +1,98 @@
+<div id="overMenu">
+
+    <div class="sidebar-heading">
+        Administración de Stock
+    </div>
+
+    <!-- Nav Item - Tables -->
+    
+    <li class="nav-item" *ngIf="enableTableVenta.enable">
+        <a class="nav-link" routerLink="ventas" routerLinkActive="bold" routerLinkActive>
+            <i class="bi bi-cash-coin"></i>
+            <span>Ventas</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    
+    <li class="nav-item" *ngIf="enableFormVenta.enable">
+        <a class="nav-link" routerLink="ventas/new" routerLinkActive>
+            <i class="bi bi-cash-coin"></i>
+            <span>Nueva Venta</span></a>
+    </li>
+    
+
+
+
+
+    <li class="nav-item" *ngIf="enableTableArticulo.enable">
+        <a class="nav-link" routerLink="articulos" routerLinkActive>
+            <i class="bi bi-box-seam"></i>
+            <span>Artículos</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item" *ngIf="enableFormArticulo.enable">
+        <a class="nav-link" routerLink="articulos/new" routerLinkActive>
+            <i class="bi bi-box-seam"></i>
+            <span>Nuevo Artículo</span></a>
+    </li>
+
+    <li class="nav-item" *ngIf="enableTableGrupoArticulo.enable">
+        <a class="nav-link" routerLink="grupos" routerLinkActive>
+            <i class="bi bi-columns-gap"></i><!--<i class="bi bi-grid-fill"></i>-->
+            <span>Grupos</span></a>
+    </li>
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item" *ngIf="enableFormGrupoArticulo.enable">
+        <a class="nav-link" routerLink="grupos/new" routerLinkActive>
+            <i class="bi bi-columns-gap"></i><!--<i class="bi bi-grid-fill"></i>-->
+            <span>Nuevo Grupo</span></a>
+    </li>
+
+    <li class="nav-item" *ngIf="enableTableCombo.enable">
+        <a class="nav-link" routerLink="combos" routerLinkActive>
+            <i class="bi bi-diagram-2"></i>
+            <span>Combos</span></a>
+    </li>
+
+    <li class="nav-item" *ngIf="enableFormCombo.enable">
+        <a class="nav-link" routerLink="combos/new" routerLinkActive>
+            <i class="bi bi-diagram-2"></i>
+            <span>Nuevo Combo</span></a>
+    </li>
+
+
+    <!-- Administracion -->
+    
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Administración de Usuarios
+    </div>
+
+    <li class="nav-item" *ngIf="enableTableUsuario.enable">
+        <a class="nav-link" routerLink="usuarios" routerLinkActive>
+            <i class="bi bi-person-circle"></i>
+            <span>Usuarios</span></a>
+    </li>
+
+    <li class="nav-item" *ngIf="enableFormUsuario.enable">
+        <a class="nav-link" routerLink="usuarios/new" routerLinkActive>
+            <i class="bi bi-person-circle"></i>
+            <span>Nuevo Usuario</span></a>
+    </li>
+
+    <li class="nav-item" *ngIf="enableTablePerfil.enable">
+        <a class="nav-link" routerLink="perfiles" routerLinkActive>
+            <i class="bi bi-key"></i>
+            <span>Perfiles</span></a>
+    </li>
+
+    <li class="nav-item" *ngIf="enableFormPerfil.enable">
+        <a class="nav-link" routerLink="perfiles/new" routerLinkActive>
+            <i class="bi bi-key"></i>
+            <span>Nuevo Perfil</span></a>
+    </li>
+    
+</div>

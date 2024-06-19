@@ -1,0 +1,22 @@
+<!-- Heading -->
+<div class="sidebar-heading">
+    Negocios
+</div>
+
+
+<li class="nav-item" *ngIf="enableFerreteria.enable">
+    <a class="nav-link" (click)="change(enableFerreteria)">
+        <i class="bi bi-house-door-fill"></i>
+        <span>Ferretería</span></a>
+</li>
+
+<li class="nav-item" *ngIf="enableMuebleria.enable">
+    <a class="nav-link" (click)="change(enableMuebleria)">
+        <i class="bi bi-house-door-fill"></i>
+        <span>Mueblería</span></a>
+</li>
+<li class="nav-item" *ngIf="enableSeguridad.enable">
+    <a class="nav-link" (click)="change(enableSeguridad)">
+        <i class="bi bi-house-door-fill"></i>
+        <span>Higiene y Seguridad</span></a>
+</li>

@@ -1,0 +1,104 @@
+<form [formGroup]="formCliente"><!--(ngSubmit)="onSubmit()"-->
+    <h3>Datos Del Cliente:</h3>
+    <div>
+        <div class="row mb-4 mr-0 ml-0">
+            <div class="col-4">
+                <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="CUIT/DNI..."
+                aria-label="cuit" aria-describedby="basic-addon2" formControlName="cuitDni" *ngIf="!clienteEdit"
+                [class.is-invalid]="formCliente.get('cuitDni')?.touched && formCliente.get('cuitDni')?.invalid"
+                matInput
+                
+                [matAutocomplete]="auto"
+                ><!--[formControl]="clienteFilter"-->
+                <div *ngIf="formCliente.get('cuitDni')?.touched && formCliente.get('cuitDni')?.invalid" 
+                class="invalid-feedback m-0 position-absolute">
+                    DNI/CUIT no válido
+                </div>
+
+                <input type="text" appOnlyNumbers class="form-control bg-light border-0 small" placeholder="CUIT/DNI..."
+                aria-label="cuit" aria-describedby="basic-addon2" formControlName="cuitDni" *ngIf="clienteEdit"
+                [class.is-invalid]="formCliente.get('cuitDni')?.touched && formCliente.get('cuitDni')?.invalid">
+                <div *ngIf="formCliente.get('cuitDni')?.touched && formCliente.get('cuitDni')?.invalid" 
+                class="invalid-feedback m-0 position-absolute">
+                    DNI/CUIT no válido
+                </div>
+
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='select($event.option.value)'>
+                    @for (cliente of filteredCliente | async; track cliente) {
+                        <mat-option [value]="cliente">{{cliente.cuitDni}}</mat-option>
+                    }                
+                    <!--
+                    <mat-option *ngFor="let item of filteredBaseItem" [value]="item">{{item.codigo}} - {{item.nombre}}</mat-option>
+                    <mat-option *ngIf="!filteredBaseItem || filteredBaseItem.length == 0" [disabled]="true">No hay coincidencias...</mat-option>
+                    -->
+                </mat-autocomplete>
+
+
+
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Nombre"
+                aria-label="Nombre" aria-describedby="basic-addon2" formControlName="nombre"
+                [class.is-invalid]="formCliente.get('nombre')?.touched && formCliente.get('nombre')?.invalid">
+                <div *ngIf="formCliente.get('nombre')?.touched && formCliente.get('nombre')?.invalid" 
+                class="invalid-feedback m-0 position-absolute">
+                    Nombre del cliente no válido
+                </div>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Telefono"
+                aria-label="Telefono" aria-describedby="basic-addon2" formControlName="telefono"
+                [class.is-invalid]="formCliente.get('telefono')?.touched && formCliente.get('telefono')?.invalid">
+                <div *ngIf="formCliente.get('telefono')?.touched && formCliente.get('telefono')?.invalid" 
+                class="invalid-feedback m-0 position-absolute">
+                    Telefono del cliente no válido
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4 mr-0 ml-0">
+            <div class="col-4">
+                <select class="form-control bg-light border-0 small" formControlName="condicionIva"
+                [class.is-invalid]="formCliente.get('condicionIva')?.touched && formCliente.get('condicionIva')?.invalid">
+                    <option disabled selected>Elige la condicion IVA</option>
+                    <option *ngFor="let c of condicionIVAEnum" [ngValue]="c">{{c}}</option>
+                </select>
+                <div *ngIf="formCliente.get('condicionIva')?.touched && formCliente.get('condicionIva')?.invalid" 
+                class="invalid-feedback m-0 position-absolute">
+                    Debe seleccionar un grupo para el artículo
+                </div>
+            </div>
+            <div class="col-8">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Dirección"
+                aria-label="Direccion" aria-describedby="basic-addon2" formControlName="direccion"
+                [class.is-invalid]="formCliente.get('direccion')?.touched && formCliente.get('direccion')?.invalid">
+                <div *ngIf="formCliente.get('direccion')?.touched && formCliente.get('direccion')?.invalid" 
+                class="invalid-feedback m-0 position-absolute">
+                    Dirección del cliente no válido
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="clienteEdit">
+        <button type="button" class="btn btn-success btn-icon-split"
+        [disabled]="formCliente.invalid ||
+        (formCliente.get('cuitDni')?.value == clienteEdit.cuitDni &&
+        formCliente.get('nombre')?.value == clienteEdit.nombre &&
+        formCliente.get('direccion')?.value == clienteEdit.direccion &&
+        formCliente.get('telefono')?.value == clienteEdit.telefono &&
+        formCliente.get('condicionIva')?.value == clienteEdit.condicionIva)" (click)="edit()">
+            <span class="icon text-white-50">
+                <i class="fas fa-check"></i>
+            </span>
+            <span class="text">Guardar Cliente</span>
+        </button>
+    </div>
+    <!--
+    <div>
+        {{formCliente.get('cuitDni')?.value}} -
+        {{formCliente.get('nombre')?.value}} -
+        {{formCliente.get('direccion')?.value}} -
+        {{formCliente.get('telefono')?.value}} -
+        {{formCliente.get('condicionIva')?.value}}
+    </div>
+    -->
+</form>

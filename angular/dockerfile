@@ -1,0 +1,21 @@
+#for dev
+FROM node:latest
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+CMD ["npm", "start"]
+
+#for prod
+#FROM node:latest AS build
+#WORKDIR /app
+
+#COPY . .
+#RUN npm install
+#RUN npm run build
+# Serve Application using Nginx Server
+#FROM nginx:alpine
+#COPY --from=build /app/dist/project-name/ /usr/share/nginx/html
+#EXPOSE 80

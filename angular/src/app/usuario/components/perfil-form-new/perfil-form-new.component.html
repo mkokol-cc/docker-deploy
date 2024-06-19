@@ -1,0 +1,60 @@
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Nuevo Perfil</h6>
+</div>
+<div class="card-body">
+
+    <form [formGroup]="formNewPerfil" (ngSubmit)="onSubmit()"><!---->
+        
+        <div class="mb-4">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Nombre..."
+            aria-label="Nombre" aria-describedby="basic-addon2" formControlName="nombre"
+            [class.is-invalid]="formNewPerfil.get('nombre')?.touched && formNewPerfil.get('nombre')?.invalid">
+            <div *ngIf="formNewPerfil.get('nombre')?.touched && formNewPerfil.get('nombre')?.invalid" 
+            class="invalid-feedback m-0 position-absolute">
+                Nombre entre 2 y 30 caracteres
+            </div>
+        </div>
+        <div class="mb-2">
+            <h3>Permisos</h3>
+            <div class="p-2">
+                <div class="rol-container">
+                    <div *ngFor="let r of listRolChbx" class="d-table">
+                        <div class="d-flex">
+                            <label>
+                                <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="r.checked"> {{ r.rol.nombre }}
+                            </label><!--(change)="onRolChbxChange(r.rol,$event.target)" [checked]="r.checked" -->
+                            <div class="ml-2"
+                            matTooltip="{{r.rol.descripcion}}">
+                                <i class="bi bi-info-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        
+        <div>
+            @if(perfilEdit){
+                <button type="submit" class="btn btn-success btn-icon-split"
+                [disabled]="(samePermisos() && perfilEdit.nombre==formNewPerfil.get('nombre')?.value) || formNewPerfil.invalid">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Registrar Perfil</span>
+                </button>
+            }@else{
+                <button type="submit" class="btn btn-success btn-icon-split"
+                [disabled]="getListSelectedRol().length==0 || formNewPerfil.invalid">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Registrar Perfil</span>
+                </button>
+            }
+        </div>
+
+    </form>
+    
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>

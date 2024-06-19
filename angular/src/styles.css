@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(assets/themplate/vendor/fontawesome-free/css/all.min.css);
+@import url(assets/themplate/css/sb-admin-2.min.css);
+@import url(assets/themplate/vendor/datatables/dataTables.bootstrap4.min.css);
+
+.outline-danger, .form-control.is-invalid{
+    outline-style: solid;
+    outline-color: #e74a3b7d;
+    outline-width: thin;
+}
+tr.object-row:hover{
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+html, body { height: 100%; }
+.loader-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ancho del div hijo al 100% del div padre */
+    height: 100%; /* Alto del div hijo al 100% del div padre */
+    background-color: #ffffff;
+}
+.card-body{
+    position:relative;
+    min-height: 350px;
+}
+
+.table-bordered thead, .table-bordered tfoot{
+    background-color: #f8f9fc !important;
+}
+/*
+.table-background-dark thead tr, .table-background-dark tfoot tr{
+    color: #fff;
+}*/
+.mdc-data-table__row:last-child .mat-mdc-cell {
+	border: 1px solid #e3e6f0 !important;
+}

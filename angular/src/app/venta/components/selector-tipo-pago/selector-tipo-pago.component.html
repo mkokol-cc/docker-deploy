@@ -1,0 +1,35 @@
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="tipoPagoRadio" 
+    id="tipoPagoRadio1" [(ngModel)]="selected" [value]="2" (change)="send()">
+    <label class="form-check-label" for="tipoPagoRadio1">
+        Tarjeta
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="tipoPagoRadio" 
+    id="tipoPagoRadio2" [(ngModel)]="selected" [value]="3" (change)="send()">
+    <label class="form-check-label" for="tipoPagoRadio2">
+        Tarjeta 3 Cuotas
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="tipoPagoRadio" 
+    id="tipoPagoRadio3" [(ngModel)]="selected" [value]="4" (change)="send()">
+    <label class="form-check-label" for="tipoPagoRadio3">
+        Tarjeta 6 Cuotas
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="tipoPagoRadio" 
+    id="tipoPagoRadio4" [(ngModel)]="selected" [value]="1" (change)="send()"><!--TipoPago-->
+    <label class="form-check-label" for="tipoPagoRadio4">
+        Efectivo (con IVA)
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="tipoPagoRadio" 
+    id="tipoPagoRadio5" [(ngModel)]="selected" [value]="0" (change)="send()">
+    <label class="form-check-label" for="tipoPagoRadio5">
+        Efectivo (sin IVA)
+    </label>
+</div>

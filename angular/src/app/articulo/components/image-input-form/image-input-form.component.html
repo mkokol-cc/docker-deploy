@@ -1,0 +1,24 @@
+<div class="row m-0">
+    <div class="w-100">
+        <button type="button" class="btn btn-primary btn-icon-split" (click)="fileInput.click()">
+            <span class="icon text-white-50">
+                <i class="bi bi-images"></i>
+            </span>
+            <span class="text">Añadir Fotos</span>
+        </button>
+        <input type="file" class="d-none" #fileInput (change)="onFileChange($event)" accept="image/*" multiple>
+    </div>
+    <div class="w-100 d-flex">
+        <div *ngFor="let image of webpImages" class="img-container position-relative">
+            <img [src]="'data:image/webp;base64,'+image.data" alt="Converted Image" class="img-thumbnail mx-auto d-block rounded-circle w-100 h-100">
+            <div class="w-100 h-100 position-absolute options-img fixed-top rounded-circle">
+                <button type="button" class="img-button" (click)="delete(image)">
+                    <i class="bi bi-trash"></i>
+                </button>
+                <button type="button" class="img-button" (click)="view(image)">
+                    <i class="bi bi-eye"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
